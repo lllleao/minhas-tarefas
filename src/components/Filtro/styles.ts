@@ -1,15 +1,17 @@
 import styled from 'styled-components'
 
-import { Props } from '.'
-
-type PropsStyle = Omit<Props, 'contador' | 'legenda'>
+type PropsStyle = {
+    $active?: boolean
+}
 
 export const Card = styled.div<PropsStyle>`
     padding: 8px;
-    color: ${(props) => (props.active ? '#1E90FF' : '#5e5e5e')};
-    border: 1px solid ${(props) => (props.active ? '#1E90FF' : '#a1a1a1')};
+    color: ${({ $active, theme }) => ($active ? '#1E90FF' : theme.textoClaro)};
+    border: 1px solid ${(props) => (props.$active ? '#1E90FF' : '#a1a1a1')};
     border-radius: 8px;
-    background-color: ${(props) => (props.active ? '#fff' : '#fcfcfc')};
+    background-color: ${(props) =>
+        props.$active ? props.theme.filtroAtivo : props.theme.filtroDesativo};
+    cursor: pointer;
 `
 
 export const Contador = styled.span`
